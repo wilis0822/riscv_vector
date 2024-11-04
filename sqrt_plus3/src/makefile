@@ -1,5 +1,5 @@
 # 定義執行次數
-RUN_COUNT = 50
+RUN_COUNT = 1
 
 # 主目標
 go: main repeat
@@ -12,5 +12,5 @@ main: main.cpp vec.S vec_1.S makefile
 repeat:
 	@for i in $(shell seq 1 $(RUN_COUNT)); do \
 		echo "Run $$i:"; \
-		qemu-riscv64 -cpu rv64,v=true,zba=true,vlen=128,rvv_ta_all_1s=on,rvv_ma_all_1s=on ./main -s -S; \
+		qemu-riscv64 -cpu rv64,v=true,zba=true,vlen=512,rvv_ta_all_1s=on,rvv_ma_all_1s=on ./main -s -S; \
 	done

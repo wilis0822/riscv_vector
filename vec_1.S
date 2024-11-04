@@ -26,8 +26,8 @@ loop:
     vse32.v lens, (r)
     sub n, n, vl
     sh2add r, vl, r # bump r ptr 4 bytes per float
-    sh1add vl, vl, vl # multiply vl by 3 floats per point
-    sh2add pts, vl, pts # bump v ptr 4 bytes per float (12 per pt)
-    sh2add pts1, vl, pts1 # bump v ptr 4 bytes per float (12 per pt)
+    sh1add a6, vl, vl # multiply vl by 3 floats per point
+    sh2add pts, a6, pts # bump v ptr 4 bytes per float (12 per pt)
+    sh2add pts1, a6, pts1 # bump v ptr 4 bytes per float (12 per pt)
     bnez n, loop
     ret

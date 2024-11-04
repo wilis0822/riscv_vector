@@ -1,14 +1,18 @@
  #define r a0
     #define pts a1
     #define n a2
-    #define vl a3
+    #define vr a3
+    #define vl a4
     #define Xs v0
     #define Ys v2
     #define Zs v4
     #define lens v6
     .global vec_len_rvv
-    vec_len_rvv:
+vec_len_rvv:
     vsetvli vl, n, e32,m2, ta,ma
+loop:
+
+    blt n,vl,vec_len_rvv
     vlseg3e32.v Xs, (pts) # loads interleaved Xs, Ys, Zs into 3 registers
     vfmul.vv lens, Xs, Xs
     vfmacc.vv lens, Ys, Ys
@@ -17,7 +21,7 @@
     vse32.v lens, (r)
     sub n, n, vl
     sh2add r, vl, r # bump r ptr 4 bytes per float
-    sh1add vl, vl, vl # multiply vl by 3 floats per point
-    sh2add pts, vl, pts # bump v ptr 4 bytes per float (12 per pt)
-    bnez n, vec_len_rvv
+    sh1add a5, vl, vl # multiply vl by 3 floats per point
+    sh2add pts, a5, pts # bump v ptr 4 bytes per float (12 per pt)
+    bnez n, loop
     ret
