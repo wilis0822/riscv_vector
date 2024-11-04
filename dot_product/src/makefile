@@ -14,3 +14,4 @@ repeat:
 		echo "Run $$i:"; \
 		qemu-riscv64 -cpu rv64,v=true,zba=true,vlen=1024,rvv_ta_all_1s=on,rvv_ma_all_1s=on ./main -s -S; \
 	done
+    

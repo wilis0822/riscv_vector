@@ -50,7 +50,7 @@ int main()
 
   std::cout << "Execution time (vec_len_rvv1): " << elapsed_rvv1.count() << "(s) " << (lens_rvv1[N-1]) <<"  vlmax : "<<vl2[0]<< " run times : "<<runT2[0]<<endl;
   std::string filename = "../datanum_" + std::to_string(N) + "/vlen" + std::to_string(vlen) + ".csv";
-
+   std::cout << "data_num : "<<N<<endl;
   // 寫入 vlen128.csv 檔案
   std::ofstream file2(filename, std::ios::app);
   std::vector<double> data1 = {elapsed_rvv.count(), elapsed_rvv1.count()};
